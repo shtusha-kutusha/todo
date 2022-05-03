@@ -1,13 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Nunito:wght@500;700&family=Quicksand&display=swap');
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
+  font-family: 'Quicksand', sans-serif;
+  background-color: rgb(220, 220, 25);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.todoApp {
+  display: grid;
+  grid-template-areas: 
+    "taskTitle taskTitle taskSearch taskSearch"
+    ". addingTask addingTask ."
+    ". taskList taskList .";
+  grid-template-columns: 20px 360px 270px 20px;  
+  grid-template-rows: 70px 50px 425px;
+  justify-content: center;
+  width: 670px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% - 260px);
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.taskTitle {
+  grid-area: taskTitle;
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0 20px;
+  border-bottom: 1px solid rgb(204, 201, 201);
+  font-size: 23px;
+  font-family: 'Nunito', sans-serif;
+  background-color: #f7f2f2f5;
+  font-weight: 700;
+}
+
+.addingTask {
+  grid-area: addingTask;
+  padding: 20px 0 0 0;
+}
+
+.addingTaskInput {
+  height: 30px;
+  width: 534px;
+  border: 1px solid rgb(204, 201, 201);
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+  padding: 2px 0 0 15px;
+}
+
+.addingTaskButton {
+  height: 34px;
+  width: 80px;
+  border: 1px solid rgb(49, 151, 198);
+  border-radius: 0 5px 5px 0;
+  background-color: rgb(49, 151, 198);
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  color: white;
+}
+
+.taskList {
+  grid-area: taskList;
+  padding: 0 0 15px 0;
+  margin: 25px 0;
+  overflow: auto;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  min-height: 70px;
+  list-style-type: none;
+  border: 1px solid rgb(204, 201, 201);
+  border-top: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+}
+
+.task:first-child {
+  border-top: 1px solid rgb(204, 201, 201);
+}
+
+.task:nth-child(odd) {
+  background-color: #f7f2f2f5;
+}
+
+.task.task-highlight {
+  background-color: yellow;
+}
+
+.task input[type="checkbox"] {
+  margin: 0 15px 0 15px;
+}
+
+.taskDeleteButton {
+  margin: 0 15px 0 0;
+  height: 30px;
+  width: 40px;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+}
+
+.editingTask {
+  height: 30px;
+  width: 150px;
+  margin: 0 0 0 15px;
+  padding: 0 0 0 10px;
+  color: gray;
+  border: 1px solid rgb(204, 201, 201);
+  border-radius: 5px;
+}
+
+.taskEditingButton {
+  margin: 0 15px 0 auto;
+  height: 30px;
+  width: 40px;
+  background-color: rgb(34, 184, 34);
+  border: none;
+  border-radius: 5px;
+}
+
+.taskButtonIcon {
+  filter: invert(100%);
+  height: 20px;
+  width: 20px;
+}
+
+.taskSearch {
+  grid-area: taskSearch;
+  margin: 2px 0 0 0;
+  padding: 15px;
+  border-bottom: 1px solid rgb(204, 201, 201);
+  background-color: #f7f2f2f5;
+}
+
+.findTaskInput {
+  height: 30px;
+  width: 180px;
+  border: 1px solid rgb(204, 201, 201);
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+  padding: 2px 0 0 15px;
+  position: relative;
+}
+
+.searchReset {
+  height: 28px;
+  border: 1px solid rgb(49, 151, 198);
+  border-radius: 5px;
+  background-color: rgb(49, 151, 198);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  right: 82px;
+  top: 20px;
+  position: absolute;
+}
+
+.buttonSearch {
+  width: 60px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgb(49, 151, 198);
+  border-radius: 0 5px 5px 0;
+  background-color: rgb(49, 151, 198);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  position: absolute;
+}
+
+.nameText-complete {
+  opacity: 0.5;
+}
+
+.findTaskInput:placeholder-shown ~ .searchReset {
+  display: none;
+}
+
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 0 15px 0 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.checkbox:checked+label::before {
+  background-color: #f7f2f2f5;
+  background-image: url('../public/img/icon-Checkbox.png');
 }

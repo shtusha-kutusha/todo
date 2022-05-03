@@ -1,0 +1,27 @@
+[
+    {
+        "id": "id1",
+        "name": "Сделать задание",
+        "complete": false
+    },
+    {
+        "id": "id2",
+        "name": "Сходить в магазин",
+        "complete": true
+    },
+    {
+        "id": "id3",
+        "name": "Выгулять собаку",
+        "complete": true
+    },
+    {
+        "id": "id4",
+        "name": "Сходить на тренировку",
+        "complete": false
+    },
+    {
+        "id": "id5",
+        "name": "Посмотреть кино",
+        "complete": true
+    }
+]
